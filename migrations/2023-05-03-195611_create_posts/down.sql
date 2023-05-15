@@ -6,4 +6,4 @@ drop table team_activities;
 drop table individual_report;
 drop table requirements;
 drop table team_report;
-drop table sprint;
+drop table sprintnum_date;
