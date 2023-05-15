@@ -6,7 +6,7 @@ use clap::{
 
 #[derive(Parser, Debug)]
 #[clap(author, version, about)]
-pub struct Args{
+pub struct DatabaseArgs{
     #[clap(subcommand)]
     pub entity_type: EntityType,
 }
@@ -14,11 +14,15 @@ pub struct Args{
 #[derive(Debug, Subcommand)]
 pub enum EntityType {
     ///Create, update, delete, show users
-    User(UserCommand),
+    //User(UserCommand),
     ///Create, update, delete
     Sprint(SprintCommand),
 }
 
+
+
+
+///start User command
 #[derive(Debug, Args)]
 pub struct UserCommand {
     #[clap(subcommand)]
@@ -47,8 +51,9 @@ pub struct CreateUser {
 
     /// The email of the user
     pub email: String,
-    ///TODO more User info below
+
 }
+
 #[derive(Debug, Args)]
 pub struct UpdateUser {
     /// The id of the user to update
@@ -59,7 +64,7 @@ pub struct UpdateUser {
 
     /// The email of the user
     pub email: String,
-    ///TODO more User info below
+
 }
 
 #[derive(Debug, Args)]
@@ -68,6 +73,14 @@ pub struct DeleteEntity {
     pub id: i32,
 }
 
+
+#[derive(Debug, Args)]
+pub struct SprintCommand {
+    #[clap(subcommand)]
+    pub command: SprintSubcommand,
+}
+
+///start Sprint commands
 #[derive(Debug, Subcommand)]
 pub enum SprintSubcommand {
     /// Create a new sprint

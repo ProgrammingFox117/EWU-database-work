@@ -13,7 +13,7 @@ diesel::table! {
 diesel::table! {
     individual_report (ouath_id) {
         ouath_id -> Varchar,
-        sprint -> Nullable<Integer>,
+        sprint_num -> Nullable<Integer>,
         monday_time -> Nullable<Integer>,
         tuesday_time -> Nullable<Integer>,
         wednesday_time -> Nullable<Integer>,
@@ -47,8 +47,8 @@ diesel::table! {
 }
 
 diesel::table! {
-    sprint (sprint, sprint_date) {
-        sprint -> Integer,
+    sprintnum_date (sprint_num, sprint_date) {
+        sprint_num -> Integer,
         sprint_date -> Date,
     }
 }
@@ -57,16 +57,16 @@ diesel::table! {
     team_activities (ouath_id) {
         teams -> Nullable<Varchar>,
         ouath_id -> Varchar,
-        sprint -> Nullable<Integer>,
+        sprint_num -> Nullable<Integer>,
         activity_index -> Nullable<Integer>,
         answers -> Nullable<Varchar>,
     }
 }
 
 diesel::table! {
-    team_report (teams, sprint) {
+    team_report (teams, sprint_num) {
         teams -> Varchar,
-        sprint -> Integer,
+        sprint_num -> Integer,
         understand_easiest -> Nullable<Varchar>,
         understand_hardest -> Nullable<Varchar>,
         approach_easiest -> Nullable<Varchar>,
@@ -90,7 +90,7 @@ diesel::allow_tables_to_appear_in_same_query!(
     individual_report,
     login,
     requirements,
-    sprint,
+    sprintnum_date,
     team_activities,
     team_report,
 );

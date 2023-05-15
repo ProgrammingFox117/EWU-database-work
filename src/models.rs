@@ -2,16 +2,17 @@ use crate::schema::*;
 use diesel::prelude::*;
 
 #[derive(Queryable)]
-pub struct sprintnum_date {
+pub struct sprintnum_date_return {
     pub sprint_num: i8,
     pub sprint_date: Option<String>,
 }
 
 #[derive(Insertable)]
+///            "this is the the database target!!!"
 #[diesel(table_name = sprintnum_date)]
 pub struct NewSprint<'a> {
     pub sprint_num: &'a i8,
-    pub sprint_data: &'a str,
+    pub sprint_date: &'a str,
 }
 
 #[derive(Queryable)]
