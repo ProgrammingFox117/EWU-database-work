@@ -1,0 +1,107 @@
+create table sprint
+(
+    sprint      int  not null,
+    sprint_date date not null,
+    primary key (sprint, sprint_date)
+);
+
+create table team_report
+(
+    teams              varchar(50)  not null,
+    sprint             int          not null,
+    understand_easiest varchar(300) null,
+    understand_hardest varchar(300) null,
+    approach_easiest   varchar(300) null,
+    approach_hardest   varchar(300) null,
+    solve_easiest      varchar(300) null,
+    solve_hardest      varchar(300) null,
+    evaluate_easiest   varchar(300) null,
+    evaluate_hardest   varchar(300) null,
+    completion         int          null,
+    contact            varchar(300) null,
+    comments           varchar(300) null,
+    primary key (teams, sprint),
+    constraint team_report_ibfk_1
+        foreign key (sprint) references sprint (sprint)
+);
+
+create table requirements
+(
+    class       varchar(255) null,
+    teams       varchar(255) not null,
+    indexs      int auto_increment,
+    description varchar(255) null,
+    primary key (indexs, teams)
+
+);
+
+create table individual_report
+(
+    ouath_id           varchar(255) not null primary key,
+    sprint             int          null,
+    monday_time        int          null,
+    tuesday_time       int          null,
+    wednesday_time     int          null,
+    thursday_time      int          null,
+    friday_time        int          null,
+    saturday_time      int          null,
+    sunday_time        int          null,
+    discrepancy        varchar(300) null,
+    request            varchar(300) null,
+
+    constraint individual_report_ibfk_1
+        foreign key (sprint) references sprint (sprint)
+
+);
+
+create table team_activities
+(
+    teams          varchar(50)  null,
+    ouath_id       varchar(255) not null primary key,
+    sprint         int          null,
+    activity_index int          null,
+    answers        varchar(255) null,
+    constraint team_activities_ibfk_1
+        foreign key (teams) references team_report (teams),
+    constraint team_activities_ibfk_2
+        foreign key (sprint) references sprint (sprint)
+);
+
+create table login
+(
+    ouath_id   varchar(255) not null
+        primary key,
+    is_teacher tinyint(1)   null,
+    is_student tinyint(1)   null,
+    teams      varchar(255) null,
+    class      varchar(255) null,
+    is_Admin   tinyint(1)   null,
+    constraint login_ibfk_1
+        foreign key (ouath_id) references individual_report (ouath_id),
+    constraint login_ibfk_2
+        foreign key (ouath_id) references team_activities (ouath_id)
+);
+
+create table contact
+(
+    ouath_id   varchar(255) not null primary key,
+    class      varchar(30)  null,
+    first_name varchar(30)  null,
+    last_name  varchar(30)  null,
+    email      varchar(90)  null,
+    constraint contact_ibfk_1
+        foreign key (ouath_id) references login (ouath_id)
+);
+
+create index sprint on team_activities (sprint);
+
+create index teams on team_activities (teams);
+
+create index sprint on team_report (sprint);
+
+create index teams on requirements (teams);
+
+create index sprint on individual_report (sprint);
+
+
+
