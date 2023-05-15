@@ -1,14 +1,14 @@
-create table sprint
+create table sprintnum_date
 (
-    sprint      int  not null,
+    sprint_num  int  not null,
     sprint_date date not null,
-    primary key (sprint, sprint_date)
+    primary key (sprint_num, sprint_date)
 );
 
 create table team_report
 (
     teams              varchar(50)  not null,
-    sprint             int          not null,
+    sprint_num             int          not null,
     understand_easiest varchar(300) null,
     understand_hardest varchar(300) null,
     approach_easiest   varchar(300) null,
@@ -20,9 +20,9 @@ create table team_report
     completion         int          null,
     contact            varchar(300) null,
     comments           varchar(300) null,
-    primary key (teams, sprint),
+    primary key (teams, sprint_num),
     constraint team_report_ibfk_1
-        foreign key (sprint) references sprint (sprint)
+        foreign key (sprint_num) references sprintnum_date (sprint_num)
 );
 
 create table requirements
@@ -38,7 +38,7 @@ create table requirements
 create table individual_report
 (
     ouath_id           varchar(255) not null primary key,
-    sprint             int          null,
+    sprint_num             int          null,
     monday_time        int          null,
     tuesday_time       int          null,
     wednesday_time     int          null,
@@ -50,7 +50,7 @@ create table individual_report
     request            varchar(300) null,
 
     constraint individual_report_ibfk_1
-        foreign key (sprint) references sprint (sprint)
+        foreign key (sprint_num) references sprintnum_date (sprint_num)
 
 );
 
@@ -58,13 +58,13 @@ create table team_activities
 (
     teams          varchar(50)  null,
     ouath_id       varchar(255) not null primary key,
-    sprint         int          null,
+    sprint_num         int          null,
     activity_index int          null,
     answers        varchar(255) null,
     constraint team_activities_ibfk_1
         foreign key (teams) references team_report (teams),
     constraint team_activities_ibfk_2
-        foreign key (sprint) references sprint (sprint)
+        foreign key (sprint_num) references sprintnum_date (sprint_num)
 );
 
 create table login
@@ -93,15 +93,16 @@ create table contact
         foreign key (ouath_id) references login (ouath_id)
 );
 
-create index sprint on team_activities (sprint);
+create index sprintnum_date on team_activities (sprint_num);
 
 create index teams on team_activities (teams);
 
-create index sprint on team_report (sprint);
+create index sprintnum_date on team_report (sprint_num);
 
 create index teams on requirements (teams);
 
-create index sprint on individual_report (sprint);
+create index sprintnum_date on individual_report (sprint_num);
+
 
 
 

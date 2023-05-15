@@ -1,21 +1,21 @@
 use crate::schema::*;
 use diesel::prelude::*;
 
-#[derive(Debug, Queryable, AsChangeset)]
-pub struct sprint {
-    pub sprint: i8,
-    pub sprint_date: String,
+#[derive(Queryable)]
+pub struct sprintnum_date {
+    pub sprint_num: i8,
+    pub sprint_date: Option<String>,
 }
 
 #[derive(Insertable)]
-#[diesel(table_name = sprints)]
+#[diesel(table_name = sprintnum_date)]
 pub struct NewSprint<'a> {
-    pub sprint: &'a i8,
+    pub sprint_num: &'a i8,
     pub sprint_data: &'a str,
 }
 
 #[derive(Queryable)]
-pub struct team_report {
+pub struct Team_report {
     pub sprint: i8,
     pub understand_easiest: Option<String>,
     pub understand_hardest: Option<String>,
@@ -30,7 +30,7 @@ pub struct team_report {
     pub comments: Option<String>,
 }
 #[derive(Insertable)]
-#[diesel(table_name = team_reports)]
+#[diesel(table_name = team_report)]
 pub struct NewTeamReport<'a> {
     pub sprint: &'a i8,
     pub sprint_data: &'a str,
@@ -48,7 +48,7 @@ pub struct NewTeamReport<'a> {
 }
 
 #[derive(Queryable)]
-pub struct individual_report {
+pub struct Individual_report {
     pub monday_time:f32,
     pub tuesday_time:f32,
     pub wednesday_time:f32,
@@ -62,7 +62,7 @@ pub struct individual_report {
 }
 
 #[derive(Insertable)]
-#[diesel(table_name = individual_reports)]
+#[diesel(table_name = individual_report)]
 pub struct NewIndividualReport<'a> {
     pub monday_time: &'a f32,
     pub tuesday_time: &'a f32,
@@ -77,7 +77,7 @@ pub struct NewIndividualReport<'a> {
 }
 
 #[derive(Queryable)]
-pub struct login {
+pub struct Login {
     pub is_teacher:  bool,
     pub is_student: Option<String>,
     pub admin: Option<String>,
@@ -87,7 +87,7 @@ pub struct login {
 }
 
 #[derive(Queryable)]
-pub struct requirements {
+pub struct Requirements {
     pub class:  Option<String>,
     pub description: Option<String>,
     pub teams: Option<String>,
@@ -95,7 +95,7 @@ pub struct requirements {
 }
 
 #[derive(Queryable)]
-pub struct contact {
+pub struct Contact {
     pub class:  Option<String>,
     pub first_name: Option<String>,
     pub last_name: Option<String>,
@@ -104,7 +104,7 @@ pub struct contact {
 }
 
 #[derive(Queryable)]
-pub struct team_activities {
+pub struct Team_activities {
     pub teams:  Option<String>,
     pub sprint: Option<String>,
     pub activity_index: Option<String>,
