@@ -6,7 +6,7 @@ use crate::args::{
     DeleteEntity,
 };
 use crate::db::establish_connection;
-use crate::models::{NewSprint, Sprint};
+use crate::models::{NewSprint, sprintnum_date_return};
 use diesel::prelude::*;
 
 pub fn handle_sprint_command(sprintcmd: SprintCommand){
