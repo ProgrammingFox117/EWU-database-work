@@ -14,7 +14,7 @@ pub struct DatabaseArgs{
 #[derive(Debug, Subcommand)]
 pub enum EntityType {
     ///Create, update, delete, show users
-    //User(UserCommand),
+    User(UserCommand),
     ///Create, update, delete
     Sprint(SprintCommand),
 }

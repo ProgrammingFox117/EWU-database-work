@@ -1,10 +1,4 @@
-use crate::args::{
-    SprintSubcommand,
-    SprintCommand,
-    CreateSprint,
-    UpdateUser,
-    DeleteEntity,
-};
+use crate::args::{SprintSubcommand, SprintCommand, CreateSprint, UpdateUser, DeleteEntity, UpdateSprint};
 use crate::db::establish_connection;
 use crate::models::{NewSprint, sprintnum_date_return};
 use diesel::prelude::*;
@@ -14,6 +8,9 @@ pub fn handle_sprint_command(sprintcmd: SprintCommand){
     match command{
         SprintSubcommand::Create(sprintcmd) =>{
             create_sprint(sprintcmd);
+        }
+        SprintCommand::Update(sprintcmd) =>{
+            update_sprint(sprintcmd);
         }
     }
 }
@@ -31,5 +28,8 @@ pub fn create_sprint(sprintcmd: CreateSprint){
         .values(&new_sprint)
         .execute(&connection)
         .expect("Error saving new sprint");
+}
+pub fn update_sprint(sprintcmd: UpdateSprint) {
+
 }
 
