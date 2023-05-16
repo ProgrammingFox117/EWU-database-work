@@ -31,7 +31,7 @@ pub struct Team_report {
     pub solve_hardest: String,
     pub evaluate_easiest: String,
     pub evaluate_hardest: String,
-    pub completion: Float,
+    pub completion: Double8,
     pub contact: String,
     pub comments: String,
 }
@@ -47,38 +47,38 @@ pub struct NewTeamReport<'a> {
     pub solve_hardest: &'a str,
     pub evaluate_easiest: &'a str,
     pub evaluate_hardest: &'a str,
-    pub completion: Float,
+    pub completion: Double8,
     pub contact: &'a str,
     pub comments: &'a str,
 }
 
 #[derive(Queryable)]
 pub struct Individual_report {
-    pub monday_time:Float,
-    pub tuesday_time:Float,
-    pub wednesday_time:Float,
-    pub thursday_time:Float,
-    pub friday_time:Float,
-    pub saturday_time:Float,
-    pub sunday_time: Float,
+    pub monday_time:Double8,
+    pub tuesday_time:Double8,
+    pub wednesday_time:Double8,
+    pub thursday_time:Double8,
+    pub friday_time:Double8,
+    pub saturday_time:Double8,
+    pub sunday_time: Double8,
     pub discrepancy: String,
     pub request: String,
-    pub ouath_id: Float
+    pub ouath_id: String
 }
 
 #[derive(Insertable)]
 #[diesel(table_name = individual_report)]
 pub struct NewIndividualReport<'a> {
-    pub monday_time: Float,
-    pub tuesday_time: Float,
-    pub wednesday_time: Float,
-    pub thursday_time: Float,
-    pub friday_time: Float,
-    pub saturday_time: Float,
-    pub sunday_time: Float,
-    pub discrepancy: Float,
+    pub monday_time: Double8,
+    pub tuesday_time: Double8,
+    pub wednesday_time: Double8,
+    pub thursday_time: Double8,
+    pub friday_time: Double8,
+    pub saturday_time: Double8,
+    pub sunday_time: Double8,
+    pub discrepancy: &'a str,
     pub request: &'a str,
-    pub ouath_id: Float
+    pub ouath_id: & 'a str
 }
 
 #[derive(Queryable)]
