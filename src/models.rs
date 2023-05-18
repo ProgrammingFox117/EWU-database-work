@@ -1,27 +1,28 @@
 use chrono::{Datelike, NaiveDate};
-use crate::schema::*;
+use crate::schema::sprintnum_date;
+use crate::schema::team_report;
 use diesel::prelude::*;
-use diesel::sql_types::*;
+use diesel::sql_types::Double;
 
 
 
 
 #[derive(Queryable)]
-pub struct sprintnum_date_return {
+pub struct SprintNumDateReturn {
     pub sprint_num: i32,
     pub sprint_date: NaiveDate,
 }
 
 #[derive(Insertable)]
-///            "this is the the database target!!!"
+//            "this is the the database target!!!"
 #[diesel(table_name = sprintnum_date)]
 pub struct NewSprint<'a> {
     pub sprint_num: i32,
     pub sprint_date: &'a NaiveDate,
 }
-
 #[derive(Queryable)]
-pub struct Team_report {
+pub struct TeamReport {
+    pub teams: String,
     pub sprint_num: i32,
     pub understand_easiest: String,
     pub understand_hardest: String,
@@ -31,13 +32,14 @@ pub struct Team_report {
     pub solve_hardest: String,
     pub evaluate_easiest: String,
     pub evaluate_hardest: String,
-    pub completion: Double8,
+    pub completion: f32,
     pub contact: String,
     pub comments: String,
 }
 #[derive(Insertable)]
 #[diesel(table_name = team_report)]
 pub struct NewTeamReport<'a> {
+    pub teams: &'a str,
     pub sprint_num: i32,
     pub understand_easiest: &'a str,
     pub understand_hardest: &'a str,
@@ -47,72 +49,8 @@ pub struct NewTeamReport<'a> {
     pub solve_hardest: &'a str,
     pub evaluate_easiest: &'a str,
     pub evaluate_hardest: &'a str,
-    pub completion: Double8,
+    pub completion: f32,
     pub contact: &'a str,
     pub comments: &'a str,
 }
 
-#[derive(Queryable)]
-pub struct Individual_report {
-    pub monday_time:Double8,
-    pub tuesday_time:Double8,
-    pub wednesday_time:Double8,
-    pub thursday_time:Double8,
-    pub friday_time:Double8,
-    pub saturday_time:Double8,
-    pub sunday_time: Double8,
-    pub discrepancy: String,
-    pub request: String,
-    pub ouath_id: String
-}
-
-#[derive(Insertable)]
-#[diesel(table_name = individual_report)]
-pub struct NewIndividualReport<'a> {
-    pub monday_time: Double8,
-    pub tuesday_time: Double8,
-    pub wednesday_time: Double8,
-    pub thursday_time: Double8,
-    pub friday_time: Double8,
-    pub saturday_time: Double8,
-    pub sunday_time: Double8,
-    pub discrepancy: &'a str,
-    pub request: &'a str,
-    pub ouath_id: & 'a str
-}
-
-#[derive(Queryable)]
-pub struct Login {
-    pub is_teacher:  bool,
-    pub is_student: Option<String>,
-    pub admin: Option<String>,
-    pub team: Option<String>,
-    pub class: Option<String>,
-    pub ouath_id: Option<String>
-}
-
-#[derive(Queryable)]
-pub struct Requirements {
-    pub class:  Option<String>,
-    pub description: Option<String>,
-    pub teams: Option<String>,
-    pub indexs: Option<String>
-}
-
-#[derive(Queryable)]
-pub struct Contact {
-    pub class:  Option<String>,
-    pub first_name: Option<String>,
-    pub last_name: Option<String>,
-    pub email: Option<String>,
-    pub ouath_id: Option<String>
-}
-
-#[derive(Queryable)]
-pub struct Team_activities {
-    pub teams:  Option<String>,
-    pub sprint_num: Option<String>,
-    pub activity_index: Option<String>,
-    pub answer: Option<String>,
-    pub ouath_id: Option<String>
-}
