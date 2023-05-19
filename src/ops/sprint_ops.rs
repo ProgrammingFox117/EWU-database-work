@@ -34,6 +34,7 @@ pub fn create_sprint(sprintcmd: CreateSprint){
         .execute(&mut connection)
         .expect("Error saving new sprint");
 }
+// not needed...
 pub fn update_sprint(sprintcmd: UpdateSprint) {
     println!("updating the sprint: {:?}", sprintcmd);
     use crate::schema::sprintnum_date::dsl::*;

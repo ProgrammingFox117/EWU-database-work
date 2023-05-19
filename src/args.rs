@@ -82,6 +82,7 @@ pub enum TeamReportSubcommand {
 pub struct CreateTeamReport {
     pub teams: String,
     pub sprint_num: i32,
+    //most likely need to remove
     pub understand_easiest: String,
     pub understand_hardest: String,
     pub approach_easiest:   String,
