@@ -1,9 +1,9 @@
 use crate::args::{TeamReportSubcommand, CreateTeamReport,
                   UpdateTeamReport, TeamReportCommand};
 use crate::db::establish_connection;
-use crate::models::{NewTeamReport, team_report};
+use crate::models::{NewTeamReport, TeamReport};
 use diesel::prelude::*;
-use diesel::sql_types::*;
+
 
 
 

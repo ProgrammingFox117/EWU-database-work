@@ -3,7 +3,7 @@ use crate::args::{SprintSubcommand, SprintCommand,
 use crate::db::establish_connection;
 use crate::models::{NewSprint, SprintNumDateReturn};
 use diesel::prelude::*;
-use diesel::sql_types::*;
+
 
 pub fn handle_sprint_command(sprintcmd: SprintCommand){
     let command = sprintcmd.command;
