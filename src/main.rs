@@ -10,6 +10,7 @@ mod ops;
 
 use ops::sprint_ops::handle_sprint_command;
 use ops::team_report_ops::handle_team_report_command;
+use ops::individualReport_ops::handle_individualReport_command;
 
 use args::EntityType;
 use args::DatabaseArgs;
@@ -23,7 +24,5 @@ fn main() {
         EntityType::Sprint(sprint) => handle_sprint_command(sprint),
         EntityType::TeamReport(team_report) => handle_team_report_command(team_report),
 
-        // error handling for no match command, TODO remove later when done
-        _ => ()
     }
 }

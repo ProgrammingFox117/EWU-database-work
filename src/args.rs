@@ -17,8 +17,10 @@ pub struct DatabaseArgs{
 pub enum EntityType {
     ///Create, Update, Show
     Sprint(SprintCommand),
-    ///Create, Update, show
+    ///Create, Update, Show
     TeamReport(TeamReportCommand),
+    ///Create, Update, Show
+    Individual(IndividualReportCommand),
 }
 
 //start Sprint commands
@@ -111,3 +113,35 @@ pub struct UpdateTeamReport {
     pub contact:            String,
     pub comments:           String,
 }
+
+//start IndividualReport commands
+#[derive(Debug, Args)]
+pub struct IndividualReportCommand {
+    #[clap(subcommand)]
+    pub command: IndividualReportSubcommand,
+}
+
+
+#[derive(Debug, Subcommand)]
+pub enum IndividualReportSubcommand {
+    /// Create a new sprint
+    Create(CreateIndividualReport),
+
+    /// Update an existing sprint
+    Update(UpdateIndividualReport),
+
+    /// Show all Sprints
+    Show,
+}
+
+#[derive(Debug, Args)]
+pub struct CreateIndividualReport {
+
+}
+
+#[derive(Debug, Args)]
+pub struct UpdateIndividualReport {
+
+}
+
+
