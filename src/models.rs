@@ -83,3 +83,23 @@ pub struct NewIndividualReport<'a> {
     pub discrepancy        : &'a str,
     pub request            : &'a str,
 }
+
+#[derive(Queryable)]
+pub struct Requirements
+{
+    pub class       : String,
+    pub teams       : String,
+    pub indexs      : i32,
+    pub description : String,
+}
+
+#[derive(Insertable)]
+#[diesel(table_name = requirements)]
+pub struct NewRequirements<'a> {
+
+    pub class : &'a str,
+    pub teams  : &'a str,
+    pub indexs  : i32,
+    pub description  : &'a str,
+
+}

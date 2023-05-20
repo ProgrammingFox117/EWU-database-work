@@ -24,6 +24,16 @@ create table team_report
         foreign key (sprint_num) references sprintnum_date (sprint_num)*/
 );
 
+create table requirements
+(
+    class       varchar(255) null,
+    teams       varchar(255) not null,
+    indexs      int auto_increment,
+    description varchar(255) null,
+    primary key (indexs, teams)
+
+);
+
 create table individual_report
 (
     ouath_id           varchar(255) not null primary key,
