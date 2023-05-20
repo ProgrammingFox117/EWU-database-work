@@ -65,3 +65,18 @@ create table individual_report
     constraint team_activities_ibfk_2
         foreign key (sprint_num) references sprintnum_date (sprint_num)*/
 );*/
+
+/*create table login
+(
+    ouath_id   varchar(255) not null
+        primary key,
+    is_teacher tinyint(1)   null,
+    is_student tinyint(1)   null,
+    teams      varchar(255) null,
+    class      varchar(255) null,
+    is_Admin   tinyint(1)   null,
+/*    constraint login_ibfk_1
+        foreign key (ouath_id) references individual_report (ouath_id),
+    constraint login_ibfk_2
+        foreign key (ouath_id) references team_activities (ouath_id)*/
+);*/

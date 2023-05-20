@@ -36,8 +36,8 @@ pub struct TeamReport {
 #[derive(Insertable)]
 #[diesel(table_name = team_report)]
 pub struct NewTeamReport<'a> {
-/*    pub teams: &'a str,
-    pub sprint_num: i32,*/
+    pub teams: &'a str,
+    pub sprint_num: i32,
     pub understand_easiest: &'a str,
     pub understand_hardest: &'a str,
     pub approach_easiest: &'a str,
@@ -73,7 +73,7 @@ pub struct IndividualReport
 pub struct NewIndividualReport<'a> {
     pub ouath_id           : &'a str,
     pub sprint_num         : i32,
-    pub monday_time        : i32,
+/*    pub monday_time        : i32,
     pub tuesday_time       : i32,
     pub wednesday_time     : i32,
     pub thursday_time      : i32,
@@ -81,7 +81,7 @@ pub struct NewIndividualReport<'a> {
     pub saturday_time      : i32,
     pub sunday_time        : i32,
     pub discrepancy        : &'a str,
-    pub request            : &'a str,
+    pub request            : &'a str,*/
 }
 
 /*#[derive(Queryable)]
