@@ -79,7 +79,7 @@ pub struct NewIndividualReport<'a> {
     thursday_time      : i32,
     friday_time        : i32,
     saturday_time      : i32,
-    sunday_time        : i32,,
+    sunday_time        : i32,
     discrepancy        : &'a str,
     request            : &'a str,
 }
