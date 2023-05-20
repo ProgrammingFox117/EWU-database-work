@@ -35,7 +35,7 @@ pub fn create_individual_report(individual_report_cmd: CreateIndividualReport){
         .expect("Error saving new individualReport");
 }
 pub fn update_individual_report(individual_report_cmd: UpdateIndividualReport) {
-    /*println!("updating the individualReport: {:?}", individual_report_cmd);
+    println!("updating the individualReport: {:?}", individual_report_cmd);
     use crate::schema::individual_report::dsl::*;
 
     let mut connection = establish_connection();
@@ -45,7 +45,7 @@ pub fn update_individual_report(individual_report_cmd: UpdateIndividualReport) {
         .execute(&mut connection)
         .expect("Error updating individualReport");
 
-    println!("Updated {} rows", updated_row);*/
+    println!("Updated {} rows", updated_row);
 
 }
 pub fn show(){
