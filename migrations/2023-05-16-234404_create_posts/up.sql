@@ -53,3 +53,15 @@ create table individual_report
 */
 );
 
+/*create table team_activities
+(
+    teams          varchar(50)  null,
+    ouath_id       varchar(255) not null primary key,
+    sprint_num     int          null,
+    activity_index int          null,
+    answers        varchar(255) null,
+ /*   constraint team_activities_ibfk_1
+        foreign key (teams) references team_report (teams),
+    constraint team_activities_ibfk_2
+        foreign key (sprint_num) references sprintnum_date (sprint_num)*/
+);*/

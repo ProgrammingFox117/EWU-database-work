@@ -103,3 +103,26 @@ pub struct NewRequirements<'a> {
     pub description  : &'a str,
 
 }*/
+
+/*#[derive(Queryable)]
+pub struct TeamActivities
+{
+    pub teams           : String,
+    pub ouath_id        : String,
+    pub sprint_num      : i32,
+    pub activity_index  : i32,
+    pub answers         : String,
+}
+
+#[derive(Insertable)]
+#[diesel(table_name = team_activities)]
+pub struct NewTeamActivities<'a> {
+
+    pub teams  : &'a str,
+    pub teams           : &'a str,
+    pub ouath_id        : &'a str,
+    pub sprint_num      : i32,
+    pub activity_index  : i32,
+    pub answers         : &'a str,
+
+}*/
