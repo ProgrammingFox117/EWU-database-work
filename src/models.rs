@@ -71,15 +71,15 @@ pub struct IndividualReport
 #[derive(Insertable)]
 #[diesel(table_name = individual_report)]
 pub struct NewIndividualReport<'a> {
-    ouath_id           : &'a str,
-    sprint_num         : i32,
-    monday_time        : i32,
-    tuesday_time       : i32,
-    wednesday_time     : i32,
-    thursday_time      : i32,
-    friday_time        : i32,
-    saturday_time      : i32,
-    sunday_time        : i32,
-    discrepancy        : &'a str,
-    request            : &'a str,
+    pub ouath_id           : &'a str,
+    pub sprint_num         : i32,
+    pub monday_time        : i32,
+    pub tuesday_time       : i32,
+    pub wednesday_time     : i32,
+    pub thursday_time      : i32,
+    pub friday_time        : i32,
+    pub saturday_time      : i32,
+    pub sunday_time        : i32,
+    pub discrepancy        : &'a str,
+    pub request            : &'a str,
 }
