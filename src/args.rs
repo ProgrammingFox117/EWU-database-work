@@ -96,11 +96,14 @@ pub struct CreateTeamReport {
     pub completion:         f32,
     pub contact:            String,
     pub comments:           String,
+    //most likely need to remove
 }
 
 #[derive(Debug, Args)]
 pub struct UpdateTeamReport {
+    //most likely need to remove
     pub sprint_num: i32,
+    //most likely need to remove
     pub understand_easiest: String,
     pub understand_hardest: String,
     pub approach_easiest:   String,
@@ -136,12 +139,21 @@ pub enum IndividualReportSubcommand {
 
 #[derive(Debug, Args)]
 pub struct CreateIndividualReport {
-
+    pub ouath_id: String,
+    pub sprint_num: i32,
 }
 
 #[derive(Debug, Args)]
 pub struct UpdateIndividualReport {
-
+    pub monday_time: i32,
+    pub tuesday_time: i32,
+    pub wednesday_time: i32,
+    pub thursday_time: i32,
+    pub friday_time: i32,
+    pub saturday_time: i32,
+    pub sunday_time: i32,
+    pub discrepancy: String,
+    pub request: String,
 }
 
 

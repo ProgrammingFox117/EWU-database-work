@@ -1,51 +1,41 @@
-use crate::args::{individualReportSubcommand, individualReportCommand, CreateindividualReport,
-                  UpdateUser, DeleteEntity, UpdateindividualReport};
+use crate::args::{IndividualReportSubcommand, IndividualReportCommand, CreateIndividualReport,
+                  UpdateIndividualReport};
 use crate::db::establish_connection;
-use crate::models::{NewindividualReport, Individual_report};
+use crate::models::{NewIndividualReport, IndividualReport};
 use diesel::prelude::*;
 use diesel::sql_types::*;
 
-pub fn handle_individualReport_command(individualReportcmd: individualReportCommand){
-    let command = individualReportcmd.command;
+pub fn handle_individual_report_command(individual_report_cmd: IndividualReportCommand){
+    let command = individual_report_cmd.command;
     match command{
-        individualReportSubcommand::Create(individualReportcmd) =>{
-            create_individualReport(individualReportcmd);
+        IndividualReportSubcommand::Create(individual_report_cmd) =>{
+            create_individual_report(individual_report_cmd);
         }
-        individualReportSubcommand::Update(individualReportcmd) =>{
-            update_individualReport(individualReportcmd);
+        IndividualReportSubcommand::Update(individual_report_cmd) =>{
+            update_individual_report(individual_report_cmd);
         }
-        individualReportSubcommand::Show => {
+        IndividualReportSubcommand::Show => {
             show();
         }
     }
 }
-pub fn create_individualReport(individualReportcmd: CreateindividualReport){
-    println!("creating the individualReport: {:?}", individualReportcmd);
-    use crate::schema::individualReportnum_date::dsl::*;
+pub fn create_individual_report(individual_report_cmd: CreateIndividualReport){
+    println!("creating the Individual Report: {:?}", individual_report_cmd);
+    use crate::schema::individual_report::dsl::*;
 
     let mut connection = establish_connection();
-    let new_individualReport = NewindividualReport {
-        individualReport_monday_time: &individualReportcmd.monday_time,
-        individualReport_tuesday_time: &individualReportcmd.tuesday_time,
-        individualReport_wednesday_time: &individualReportcmd.wednesday_time,
-        individualReport_thursday_time: &individualReportcmd.thursday_time,
-        individualReport_friday_time: &individualReportcmd.friday_time,
-        individualReport_saturday_time: &individualReportcmd.saturday_time,
-        individualReport_sunday_time: &individualReportcmd.sunday_time,
-
-        individualReport_discrepancy: &individualReportcmd.discrepancy,
-        individualReport_request: &individualReportcmd.request,
-        individualReport_ouath_id: &individualReportcmd.ouath_id,
-
+    let new_individual_report = NewIndividualReport {
+        ouath_id: new_individual_report.ouath_id,
+        sprint_num: new_individual_report.sprint_num,
     };
     // DATABASE TARGET
     diesel::insert_into(individualReportnum_date)
-        .values(&new_individualReport)
+        .values(&new_individual_report)
         .execute(&mut connection)
         .expect("Error saving new individualReport");
 }
-pub fn update_individualReport(individualReportcmd: UpdateindividualReport) {
-    println!("updating the individualReport: {:?}", individualReportcmd);
+pub fn update_individual_report(individual_report_cmd: UpdateIndividualReport) {
+    println!("updating the individualReport: {:?}", individual_report_cmd);
     use crate::schema::Individual_report::dsl::*;
 
     let mut connection = establish_connection();
@@ -58,7 +48,7 @@ pub fn update_individualReport(individualReportcmd: UpdateindividualReport) {
     println!("Updated {} rows", updated_row);
 
 }
-pub fn show(){
+/*pub fn show(){
     println!("Induival reports");
     use crate::chema::videos::dsl::*;
 
@@ -68,4 +58,4 @@ pub fn show(){
         .filter(removed.eq(false))
         .load::<Individual_report>(conn: &connection)
         .expect("error loading Individual_report");
-}
+}*/
