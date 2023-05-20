@@ -25,37 +25,29 @@ pub fn create_individual_report(individual_report_cmd: CreateIndividualReport){
 
     let mut connection = establish_connection();
     let new_individual_report = NewIndividualReport {
-        ouath_id: new_individual_report.ouath_id,
-        sprint_num: new_individual_report.sprint_num,
+        ouath_id: &individual_report_cmd.ouath_id,
+        sprint_num: individual_report_cmd.sprint_num,
     };
     // DATABASE TARGET
-    diesel::insert_into(individualReportnum_date)
+    diesel::insert_into(individual_report)
         .values(&new_individual_report)
         .execute(&mut connection)
         .expect("Error saving new individualReport");
 }
 pub fn update_individual_report(individual_report_cmd: UpdateIndividualReport) {
-    println!("updating the individualReport: {:?}", individual_report_cmd);
-    use crate::schema::Individual_report::dsl::*;
+    /*println!("updating the individualReport: {:?}", individual_report_cmd);
+    use crate::schema::individual_report::dsl::*;
 
     let mut connection = establish_connection();
-    let target = Individual_report.filter(individualReport_num.eq(&individualReportcmd.Individual_report));
+    let target = IndividualReport.filter(IndividualReport.eq(&individual_report_cmd.individual_report));
     let updated_row = diesel::update(target)
-        .set(Individual_report.eq(&individualReportcmd.Individual_report))
+        .set(individual_report.eq(&individual_report_cmd.individual_report))
         .execute(&mut connection)
         .expect("Error updating individualReport");
 
-    println!("Updated {} rows", updated_row);
+    println!("Updated {} rows", updated_row);*/
 
 }
-/*pub fn show(){
-    println!("Induival reports");
-    use crate::chema::videos::dsl::*;
+pub fn show(){
 
-    let connection = establish_connection();
-
-    let results = videos
-        .filter(removed.eq(false))
-        .load::<Individual_report>(conn: &connection)
-        .expect("error loading Individual_report");
-}*/
+}

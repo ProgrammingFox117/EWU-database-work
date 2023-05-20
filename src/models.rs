@@ -1,6 +1,5 @@
 use chrono::{Datelike, NaiveDate};
-use crate::schema::sprintnum_date;
-use crate::schema::team_report;
+use crate::schema::*;
 use diesel::prelude::*;
 
 
@@ -73,15 +72,7 @@ pub struct IndividualReport
 pub struct NewIndividualReport<'a> {
     pub ouath_id           : &'a str,
     pub sprint_num         : i32,
-/*    pub monday_time        : i32,
-    pub tuesday_time       : i32,
-    pub wednesday_time     : i32,
-    pub thursday_time      : i32,
-    pub friday_time        : i32,
-    pub saturday_time      : i32,
-    pub sunday_time        : i32,
-    pub discrepancy        : &'a str,
-    pub request            : &'a str,*/
+
 }
 
 /*#[derive(Queryable)]

@@ -10,7 +10,7 @@ mod ops;
 
 use ops::sprint_ops::handle_sprint_command;
 use ops::team_report_ops::handle_team_report_command;
-use ops::individualReport_ops::handle_individual_report_command;
+use ops::individual_report_ops::handle_individual_report_command;
 
 use args::EntityType;
 use args::DatabaseArgs;
