@@ -84,7 +84,7 @@ pub struct NewIndividualReport<'a> {
     pub request            : &'a str,
 }
 
-#[derive(Queryable)]
+/*#[derive(Queryable)]
 pub struct Requirements
 {
     pub class       : String,
@@ -102,4 +102,4 @@ pub struct NewRequirements<'a> {
     pub indexs  : i32,
     pub description  : &'a str,
 
-}
+}*/

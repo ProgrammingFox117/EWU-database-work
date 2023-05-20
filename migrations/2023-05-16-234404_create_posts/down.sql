@@ -3,4 +3,4 @@
 drop table team_report;
 drop table sprintnum_date;
 drop table individual_report;
-drop table requirements;
+/*drop table requirements;*/

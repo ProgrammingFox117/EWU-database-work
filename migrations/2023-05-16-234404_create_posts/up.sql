@@ -24,7 +24,7 @@ create table team_report
         foreign key (sprint_num) references sprintnum_date (sprint_num)*/
 );
 
-create table requirements
+/*create table requirements
 (
     class       varchar(255) null,
     teams       varchar(255) not null,
@@ -32,7 +32,7 @@ create table requirements
     description varchar(255) null,
     primary key (indexs, teams)
 
-);
+);*/
 
 create table individual_report
 (
