@@ -4,9 +4,6 @@ use crate::schema::team_report;
 use diesel::prelude::*;
 
 
-
-
-
 #[derive(Queryable)]
 pub struct SprintNumDateReturn {
     pub sprint_num: i32,
