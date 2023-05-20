@@ -2,3 +2,4 @@
 
 drop table team_report;
 drop table sprintnum_date;
+drop table individual_report;

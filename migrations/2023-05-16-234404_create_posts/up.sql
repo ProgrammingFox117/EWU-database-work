@@ -24,4 +24,22 @@ create table team_report
         foreign key (sprint_num) references sprintnum_date (sprint_num)*/
 );
 
+create table individual_report
+(
+    ouath_id           varchar(255) not null primary key,
+    sprint_num             int          null,
+    monday_time        int          null,
+    tuesday_time       int          null,
+    wednesday_time     int          null,
+    thursday_time      int          null,
+    friday_time        int          null,
+    saturday_time      int          null,
+    sunday_time        int          null,
+    discrepancy        varchar(300) null,
+    request            varchar(300) null,
+
+  /*  constraint individual_report_ibfk_1
+        foreign key (sprint_num) references sprintnum_date (sprint_num)
+*/
+);
 
