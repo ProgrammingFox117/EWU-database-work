@@ -66,27 +66,12 @@ pub enum TeamReportSubcommand {
 pub struct CreateTeamReport {
     pub teams: String,
     pub sprint_num: i32,
-    //most likely need to remove
-    pub understand_easiest: String,
-    pub understand_hardest: String,
-    pub approach_easiest: String,
-    pub approach_hardest: String,
-    pub solve_easiest: String,
-    pub solve_hardest: String,
-    pub evaluate_easiest: String,
-    pub evaluate_hardest: String,
-    pub completion: f32,
-    pub contact: String,
-    pub comments: String,
-    //most likely need to remove
 }
 
 #[derive(Debug, Args)]
 pub struct UpdateTeamReport {
-    //most likely need to remove
     pub teams: String,
     pub sprint_num: i32,
-    //most likely need to remove
     pub understand_easiest: String,
     pub understand_hardest: String,
     pub approach_easiest: String,

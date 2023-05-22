@@ -39,17 +39,6 @@ pub struct TeamReport {
 pub struct NewTeamReport<'a> {
     pub teams: &'a str,
     pub sprint_num: i32,
-    pub understand_easiest: &'a str,
-    pub understand_hardest: &'a str,
-    pub approach_easiest: &'a str,
-    pub approach_hardest: &'a str,
-    pub solve_easiest: &'a str,
-    pub solve_hardest: &'a str,
-    pub evaluate_easiest: &'a str,
-    pub evaluate_hardest: &'a str,
-    pub completion: f32,
-    pub contact: &'a str,
-    pub comments: &'a str,
 }
 
 #[derive(Queryable, Debug, AsChangeset)]

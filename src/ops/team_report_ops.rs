@@ -26,17 +26,6 @@ pub fn create_team_report(team_report_cmd: CreateTeamReport) {
     let new_team_report = NewTeamReport {
         teams: &team_report_cmd.teams,
         sprint_num: team_report_cmd.sprint_num,
-        understand_easiest: &team_report_cmd.understand_easiest,
-        understand_hardest: &team_report_cmd.understand_hardest,
-        approach_easiest: &team_report_cmd.approach_easiest,
-        approach_hardest: &team_report_cmd.approach_hardest,
-        solve_easiest: &team_report_cmd.solve_easiest,
-        solve_hardest: &team_report_cmd.solve_hardest,
-        evaluate_easiest: &team_report_cmd.evaluate_easiest,
-        evaluate_hardest: &team_report_cmd.evaluate_hardest,
-        completion: team_report_cmd.completion,
-        contact: &team_report_cmd.contact,
-        comments: &team_report_cmd.comments,
     };
     // DATABASE TARGET
     diesel::insert_into(team_reports)

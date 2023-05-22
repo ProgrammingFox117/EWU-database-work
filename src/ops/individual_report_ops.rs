@@ -39,7 +39,7 @@ pub fn create_individual_report(individual_report_cmd: CreateIndividualReport) {
         .execute(connection)
         .expect("Error saving new individualReport");
 }
-///
+
 pub fn update_individual_report(individual_report_cmd: UpdateIndividualReport) {
     println!("updating the individualReport: {:?}", individual_report_cmd);
     use crate::schema::individual_reports::dsl::*;
