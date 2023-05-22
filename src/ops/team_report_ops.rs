@@ -22,7 +22,7 @@ pub fn create_team_report(team_report_cmd: CreateTeamReport) {
     println!("creating the new_team_report: {:?}", team_report_cmd);
     use crate::schema::team_reports::dsl::*;
 
-    let mut connection = establish_connection();
+    let connection = &mut establish_connection();
     let new_team_report = NewTeamReport {
         teams: &team_report_cmd.teams,
         sprint_num: team_report_cmd.sprint_num,
@@ -41,7 +41,7 @@ pub fn create_team_report(team_report_cmd: CreateTeamReport) {
     // DATABASE TARGET
     diesel::insert_into(team_reports)
         .values(&new_team_report)
-        .execute(&mut connection)
+        .execute(connection)
         .expect("Error saving new team report");
 }
 
@@ -49,7 +49,7 @@ pub fn update_team_report(team_report_cmd: UpdateTeamReport) {
     println!("updating team report: {:?}", team_report_cmd);
     use crate::schema::team_reports::dsl::*;
 
-    let mut connection = establish_connection();
+    let connection = &mut establish_connection();
     let new_team_report = TeamReport {
         teams: team_report_cmd.teams.clone(),
         sprint_num: team_report_cmd.sprint_num,
@@ -69,7 +69,7 @@ pub fn update_team_report(team_report_cmd: UpdateTeamReport) {
     let updated_row =
         diesel::update(team_reports.find((team_report_cmd.teams, team_report_cmd.sprint_num)))
             .set(&new_team_report)
-            .execute(&mut connection)
+            .execute(connection)
             .expect("Error updating teamReport");
     println!("Updated {} rows", updated_row);
 }

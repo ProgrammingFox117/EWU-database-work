@@ -19,7 +19,7 @@ pub fn create_sprint(sprintcmd: CreateSprint) {
     println!("creating the sprint: {:?}", sprintcmd);
     use crate::schema::sprint_num_dates::dsl::*;
 
-    let mut connection = establish_connection();
+    let connection = &mut establish_connection();
     let new_sprint = NewSprint {
         sprint_num: sprintcmd.sprint_num,
         sprint_date: &sprintcmd.sprint_date,
@@ -27,7 +27,7 @@ pub fn create_sprint(sprintcmd: CreateSprint) {
     // DATABASE TARGET
     diesel::insert_into(sprint_num_dates)
         .values(&new_sprint)
-        .execute(&mut connection)
+        .execute(connection)
         .expect("Error saving new sprint");
 }
 

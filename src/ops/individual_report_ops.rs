@@ -28,7 +28,7 @@ pub fn create_individual_report(individual_report_cmd: CreateIndividualReport) {
     );
     use crate::schema::individual_reports::dsl::*;
 
-    let mut connection = establish_connection();
+    let connection = &mut establish_connection();
     let new_individual_report = NewIndividualReport {
         ouath_id: &individual_report_cmd.ouath_id,
         sprint_num: individual_report_cmd.sprint_num,
@@ -36,7 +36,7 @@ pub fn create_individual_report(individual_report_cmd: CreateIndividualReport) {
     // DATABASE TARGET
     diesel::insert_into(individual_reports)
         .values(&new_individual_report)
-        .execute(&mut connection)
+        .execute(connection)
         .expect("Error saving new individualReport");
 }
 ///
@@ -44,7 +44,7 @@ pub fn update_individual_report(individual_report_cmd: UpdateIndividualReport) {
     println!("updating the individualReport: {:?}", individual_report_cmd);
     use crate::schema::individual_reports::dsl::*;
 
-    let mut connection = establish_connection();
+    let connection = &mut establish_connection();
     let new_individual_report = IndividualReport {
         ouath_id: individual_report_cmd.ouath_id.clone(),
         sprint_num: individual_report_cmd.sprint_num,
@@ -64,7 +64,7 @@ pub fn update_individual_report(individual_report_cmd: UpdateIndividualReport) {
         individual_report_cmd.sprint_num,
     )))
     .set(&new_individual_report)
-    .execute(&mut connection)
+    .execute(connection)
     .expect("Error updating individualReport");
 
     println!("Updated {} rows", updated_row);
