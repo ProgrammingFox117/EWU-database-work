@@ -1,7 +1,7 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    individual_report (ouath_id, sprint_num) {
+    individual_reports (ouath_id, sprint_num) {
         ouath_id -> Varchar,
         sprint_num -> Integer,
         monday_time -> Nullable<Integer>,
@@ -17,14 +17,14 @@ diesel::table! {
 }
 
 diesel::table! {
-    sprintnum_date (sprint_num) {
+    sprint_num_dates (sprint_num) {
         sprint_num -> Integer,
         sprint_date -> Date,
     }
 }
 
 diesel::table! {
-    team_report (teams, sprint_num) {
+    team_reports (teams, sprint_num) {
         teams -> Varchar,
         sprint_num -> Integer,
         understand_easiest -> Nullable<Varchar>,
@@ -41,8 +41,4 @@ diesel::table! {
     }
 }
 
-diesel::allow_tables_to_appear_in_same_query!(
-    individual_report,
-    sprintnum_date,
-    team_report,
-);
+diesel::allow_tables_to_appear_in_same_query!(individual_reports, sprint_num_dates, team_reports,);

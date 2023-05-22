@@ -1,19 +1,15 @@
-use crate::args::{TeamReportSubcommand, CreateTeamReport,
-                  UpdateTeamReport, TeamReportCommand};
+use crate::args::{CreateTeamReport, TeamReportCommand, TeamReportSubcommand, UpdateTeamReport};
 use crate::db::establish_connection;
 use crate::models::{NewTeamReport, TeamReport};
 use diesel::prelude::*;
 
-
-
-
-pub fn handle_team_report_command(team_report_cmd: TeamReportCommand){
+pub fn handle_team_report_command(team_report_cmd: TeamReportCommand) {
     let command = team_report_cmd.command;
-    match command{
-        TeamReportSubcommand::Create(team_report_cmd) =>{
+    match command {
+        TeamReportSubcommand::Create(team_report_cmd) => {
             create_team_report(team_report_cmd);
         }
-        TeamReportSubcommand::Update(team_report_cmd) =>{
+        TeamReportSubcommand::Update(team_report_cmd) => {
             update_team_report(team_report_cmd);
         }
         TeamReportSubcommand::Show => {
@@ -22,9 +18,9 @@ pub fn handle_team_report_command(team_report_cmd: TeamReportCommand){
     }
 }
 
-pub fn create_team_report(team_report_cmd: CreateTeamReport){
+pub fn create_team_report(team_report_cmd: CreateTeamReport) {
     println!("creating the new_team_report: {:?}", team_report_cmd);
-    use crate::schema::team_report::dsl::*;
+    use crate::schema::team_reports::dsl::*;
 
     let mut connection = establish_connection();
     let new_team_report = NewTeamReport {
@@ -43,18 +39,19 @@ pub fn create_team_report(team_report_cmd: CreateTeamReport){
         comments: &team_report_cmd.comments,
     };
     // DATABASE TARGET
-    diesel::insert_into(team_report)
+    diesel::insert_into(team_reports)
         .values(&new_team_report)
         .execute(&mut connection)
         .expect("Error saving new team report");
 }
 
-pub fn update_team_report(team_report_cmd: UpdateTeamReport){
+pub fn update_team_report(team_report_cmd: UpdateTeamReport) {
     println!("updating team report: {:?}", team_report_cmd);
-    use crate::schema::team_report::dsl::*;
+    use crate::schema::team_reports::dsl::*;
 
     let mut connection = establish_connection();
-    let new_team_report = UpdateTeamReport {
+    let new_team_report = TeamReport {
+        teams: team_report_cmd.teams.clone(),
         sprint_num: team_report_cmd.sprint_num,
         understand_easiest: team_report_cmd.understand_easiest,
         understand_hardest: team_report_cmd.understand_hardest,
@@ -69,10 +66,14 @@ pub fn update_team_report(team_report_cmd: UpdateTeamReport){
         comments: team_report_cmd.comments,
     };
     // DATABASE TARGET
+    let updated_row =
+        diesel::update(team_reports.find((team_report_cmd.teams, team_report_cmd.sprint_num)))
+            .set(&new_team_report)
+            .execute(&mut connection)
+            .expect("Error updating teamReport");
+    println!("Updated {} rows", updated_row);
 }
 
-pub fn show_team_report(){
-
+pub fn show_team_report() {
+    // TODO: implement show_team_report
 }
-
-

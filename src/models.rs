@@ -1,22 +1,23 @@
-use chrono::{Datelike, NaiveDate};
-use crate::schema::*;
-use diesel::prelude::*;
+use crate::schema::individual_reports;
+use crate::schema::sprint_num_dates;
+use crate::schema::team_reports;
+use chrono::NaiveDate;
 
-
-#[derive(Queryable)]
-pub struct SprintNumDateReturn {
+#[derive(Queryable, Debug, AsChangeset)]
+pub struct SprintNumDate {
     pub sprint_num: i32,
     pub sprint_date: NaiveDate,
 }
 
 #[derive(Insertable)]
-//            "this is the the database target!!!"
-#[diesel(table_name = sprintnum_date)]
+// db target must be specified as table_name
+#[diesel(table_name = sprint_num_dates)]
 pub struct NewSprint<'a> {
     pub sprint_num: i32,
     pub sprint_date: &'a NaiveDate,
 }
-#[derive(Queryable)]
+
+#[derive(Queryable, Debug, AsChangeset)]
 pub struct TeamReport {
     pub teams: String,
     pub sprint_num: i32,
@@ -32,8 +33,9 @@ pub struct TeamReport {
     pub contact: String,
     pub comments: String,
 }
+
 #[derive(Insertable)]
-#[diesel(table_name = team_report)]
+#[diesel(table_name = team_reports)]
 pub struct NewTeamReport<'a> {
     pub teams: &'a str,
     pub sprint_num: i32,
@@ -50,29 +52,26 @@ pub struct NewTeamReport<'a> {
     pub comments: &'a str,
 }
 
-
-#[derive(Queryable)]
-pub struct IndividualReport
-{
-    pub ouath_id           : String,
-    pub sprint_num         : i32,
-    pub monday_time        : i32,
-    pub tuesday_time       : i32,
-    pub wednesday_time     : i32,
-    pub thursday_time      : i32,
-    pub friday_time        : i32,
-    pub saturday_time      : i32,
-    pub sunday_time        : i32,
-    pub discrepancy        : String,
-    pub request            : String,
+#[derive(Queryable, Debug, AsChangeset)]
+pub struct IndividualReport {
+    pub ouath_id: String,
+    pub sprint_num: i32,
+    pub monday_time: i32,
+    pub tuesday_time: i32,
+    pub wednesday_time: i32,
+    pub thursday_time: i32,
+    pub friday_time: i32,
+    pub saturday_time: i32,
+    pub sunday_time: i32,
+    pub discrepancy: String,
+    pub request: String,
 }
 
 #[derive(Insertable)]
-#[diesel(table_name = individual_report)]
+#[diesel(table_name = individual_reports)]
 pub struct NewIndividualReport<'a> {
-    pub ouath_id           : &'a str,
-    pub sprint_num         : i32,
-
+    pub ouath_id: &'a str,
+    pub sprint_num: i32,
 }
 
 /*#[derive(Queryable)]

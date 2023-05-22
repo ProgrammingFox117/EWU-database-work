@@ -1,55 +1,49 @@
-use crate::args::{SprintSubcommand, SprintCommand,
-                  CreateSprint, UpdateSprint};
+use crate::args::{CreateSprint, SprintCommand, SprintSubcommand};
 use crate::db::establish_connection;
-use crate::models::{NewSprint, SprintNumDateReturn};
+use crate::models::{NewSprint, SprintNumDate};
 use diesel::prelude::*;
 
-
-pub fn handle_sprint_command(sprintcmd: SprintCommand){
+pub fn handle_sprint_command(sprintcmd: SprintCommand) {
     let command = sprintcmd.command;
-    match command{
-        SprintSubcommand::Create(sprintcmd) =>{
+    match command {
+        SprintSubcommand::Create(sprintcmd) => {
             create_sprint(sprintcmd);
-        }
-        SprintSubcommand::Update(sprintcmd) =>{
-            update_sprint(sprintcmd);
         }
         SprintSubcommand::Show => {
             show();
         }
     }
 }
-pub fn create_sprint(sprintcmd: CreateSprint){
+
+pub fn create_sprint(sprintcmd: CreateSprint) {
     println!("creating the sprint: {:?}", sprintcmd);
-    use crate::schema::sprintnum_date::dsl::*;
+    use crate::schema::sprint_num_dates::dsl::*;
 
     let mut connection = establish_connection();
     let new_sprint = NewSprint {
         sprint_num: sprintcmd.sprint_num,
         sprint_date: &sprintcmd.sprint_date,
     };
-                    // DATABASE TARGET
-    diesel::insert_into(sprintnum_date)
+    // DATABASE TARGET
+    diesel::insert_into(sprint_num_dates)
         .values(&new_sprint)
         .execute(&mut connection)
         .expect("Error saving new sprint");
 }
-// not needed...
-pub fn update_sprint(sprintcmd: UpdateSprint) {
-    println!("updating the sprint: {:?}", sprintcmd);
-    use crate::schema::sprintnum_date::dsl::*;
+
+pub fn show() {
+    use crate::schema::sprint_num_dates::dsl::*;
 
     let mut connection = establish_connection();
-    let target = sprintnum_date.filter(sprint_num.eq(&sprintcmd.sprint_num));
-    let updated_row = diesel::update(target)
-        .set(sprint_date.eq(&sprintcmd.sprint_date))
-        .execute(&mut connection)
-        .expect("Error updating sprint");
+    let results = sprint_num_dates
+        .load::<SprintNumDate>(&mut connection)
+        .expect("Error loading sprint_num_dates");
 
-    println!("Updated {} rows", updated_row);
-
+    println!("Displaying {} sprint_num_dates", results.len());
+    for sprint_num_date in results {
+        println!(
+            "{} {}",
+            sprint_num_date.sprint_num, sprint_num_date.sprint_date
+        );
+    }
 }
-pub fn show(){
-
-}
-

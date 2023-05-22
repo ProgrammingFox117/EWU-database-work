@@ -1,10 +1,10 @@
-create table sprintnum_date
+create table sprint_num_dates
 (
     sprint_num  int  not null,
     sprint_date date not null,
     primary key (sprint_num)
 );
-create table team_report
+create table team_reports
 (
     teams              varchar(50) not null ,
     sprint_num         int not null,
@@ -26,7 +26,7 @@ create table team_report
 
 
 
-create table individual_report
+create table individual_reports
 (
     ouath_id           varchar(255) not null,
     sprint_num         int          not null,

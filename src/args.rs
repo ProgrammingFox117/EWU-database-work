@@ -1,14 +1,9 @@
 use chrono::NaiveDate;
-use clap::{
-    Args,
-    Parser,
-    Subcommand
-};
-use diesel::sql_types::Double;
+use clap::{Args, Parser, Subcommand};
 
 #[derive(Parser, Debug)]
 #[clap(author, version, about)]
-pub struct DatabaseArgs{
+pub struct DatabaseArgs {
     #[clap(subcommand)]
     pub entity_type: EntityType,
 }
@@ -30,14 +25,10 @@ pub struct SprintCommand {
     pub command: SprintSubcommand,
 }
 
-
 #[derive(Debug, Subcommand)]
 pub enum SprintSubcommand {
     /// Create a new sprint
     Create(CreateSprint),
-
-    /// Update an existing sprint
-    Update(UpdateSprint),
 
     /// Show all Sprints
     Show,
@@ -49,15 +40,6 @@ pub struct CreateSprint {
     pub sprint_num: i32,
 
     /// The sprint date to create
-    pub sprint_date: NaiveDate,
-}
-
-#[derive(Debug, Args)]
-pub struct UpdateSprint {
-    /// The update of sprint number
-    pub sprint_num: i32,
-
-    /// The update of sprint date
     pub sprint_date: NaiveDate,
 }
 
@@ -87,34 +69,35 @@ pub struct CreateTeamReport {
     //most likely need to remove
     pub understand_easiest: String,
     pub understand_hardest: String,
-    pub approach_easiest:   String,
-    pub approach_hardest:   String,
-    pub solve_easiest:      String,
-    pub solve_hardest:      String,
-    pub evaluate_easiest:   String,
-    pub evaluate_hardest:   String,
-    pub completion:         f32,
-    pub contact:            String,
-    pub comments:           String,
+    pub approach_easiest: String,
+    pub approach_hardest: String,
+    pub solve_easiest: String,
+    pub solve_hardest: String,
+    pub evaluate_easiest: String,
+    pub evaluate_hardest: String,
+    pub completion: f32,
+    pub contact: String,
+    pub comments: String,
     //most likely need to remove
 }
 
 #[derive(Debug, Args)]
 pub struct UpdateTeamReport {
     //most likely need to remove
+    pub teams: String,
     pub sprint_num: i32,
     //most likely need to remove
     pub understand_easiest: String,
     pub understand_hardest: String,
-    pub approach_easiest:   String,
-    pub approach_hardest:   String,
-    pub solve_easiest:      String,
-    pub solve_hardest:      String,
-    pub evaluate_easiest:   String,
-    pub evaluate_hardest:   String,
-    pub completion:         f32,
-    pub contact:            String,
-    pub comments:           String,
+    pub approach_easiest: String,
+    pub approach_hardest: String,
+    pub solve_easiest: String,
+    pub solve_hardest: String,
+    pub evaluate_easiest: String,
+    pub evaluate_hardest: String,
+    pub completion: f32,
+    pub contact: String,
+    pub comments: String,
 }
 
 //start IndividualReport commands
@@ -123,7 +106,6 @@ pub struct IndividualReportCommand {
     #[clap(subcommand)]
     pub command: IndividualReportSubcommand,
 }
-
 
 #[derive(Debug, Subcommand)]
 pub enum IndividualReportSubcommand {
@@ -145,6 +127,8 @@ pub struct CreateIndividualReport {
 
 #[derive(Debug, Args)]
 pub struct UpdateIndividualReport {
+    pub ouath_id: String,
+    pub sprint_num: i32,
     pub monday_time: i32,
     pub tuesday_time: i32,
     pub wednesday_time: i32,
@@ -155,5 +139,3 @@ pub struct UpdateIndividualReport {
     pub discrepancy: String,
     pub request: String,
 }
-
-
