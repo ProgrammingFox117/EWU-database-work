@@ -57,9 +57,6 @@ pub enum TeamReportSubcommand {
 
     /// Update an existing TeamReports
     Update(UpdateTeamReport),
-
-    /// Show all TeamReports
-    Show,
 }
 
 #[derive(Debug, Args)]
@@ -80,7 +77,7 @@ pub struct UpdateTeamReport {
     pub solve_hardest: String,
     pub evaluate_easiest: String,
     pub evaluate_hardest: String,
-    pub completion: f32,
+    pub completion: i32,
     pub contact: String,
     pub comments: String,
 }
@@ -99,9 +96,6 @@ pub enum IndividualReportSubcommand {
 
     /// Update an existing sprint
     Update(UpdateIndividualReport),
-
-    /// Show all Sprints
-    Show,
 }
 
 #[derive(Debug, Args)]

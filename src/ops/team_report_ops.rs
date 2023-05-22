@@ -12,9 +12,6 @@ pub fn handle_team_report_command(team_report_cmd: TeamReportCommand) {
         TeamReportSubcommand::Update(team_report_cmd) => {
             update_team_report(team_report_cmd);
         }
-        TeamReportSubcommand::Show => {
-            show_team_report();
-        }
     }
 }
 
@@ -61,8 +58,4 @@ pub fn update_team_report(team_report_cmd: UpdateTeamReport) {
             .execute(connection)
             .expect("Error updating teamReport");
     println!("Updated {} rows", updated_row);
-}
-
-pub fn show_team_report() {
-    // TODO: implement show_team_report
 }

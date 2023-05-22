@@ -29,7 +29,7 @@ pub struct TeamReport {
     pub solve_hardest: String,
     pub evaluate_easiest: String,
     pub evaluate_hardest: String,
-    pub completion: f32,
+    pub completion: i32,
     pub contact: String,
     pub comments: String,
 }

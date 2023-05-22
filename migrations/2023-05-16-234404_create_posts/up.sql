@@ -16,7 +16,7 @@ create table team_reports
     solve_hardest      varchar(300) null,
     evaluate_easiest   varchar(300) null,
     evaluate_hardest   varchar(300) null,
-    completion         float null,
+    completion         int null,
     contact            varchar(300) null,
     comments           varchar(300) null,
     primary key (teams, sprint_num)

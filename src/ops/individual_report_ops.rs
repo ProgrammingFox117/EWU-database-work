@@ -15,9 +15,6 @@ pub fn handle_individual_report_command(individual_report_cmd: IndividualReportC
         IndividualReportSubcommand::Update(individual_report_cmd) => {
             update_individual_report(individual_report_cmd);
         }
-        IndividualReportSubcommand::Show => {
-            show();
-        }
     }
 }
 
@@ -69,4 +66,3 @@ pub fn update_individual_report(individual_report_cmd: UpdateIndividualReport) {
 
     println!("Updated {} rows", updated_row);
 }
-pub fn show() {}

@@ -34,9 +34,9 @@ pub fn create_sprint(sprintcmd: CreateSprint) {
 pub fn show() {
     use crate::schema::sprint_num_dates::dsl::*;
 
-    let mut connection = establish_connection();
+    let connection = &mut establish_connection();
     let results = sprint_num_dates
-        .load::<SprintNumDate>(&mut connection)
+        .load::<SprintNumDate>(connection)
         .expect("Error loading sprint_num_dates");
 
     println!("Displaying {} sprint_num_dates", results.len());

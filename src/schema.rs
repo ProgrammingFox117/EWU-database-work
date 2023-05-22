@@ -35,7 +35,7 @@ diesel::table! {
         solve_hardest -> Nullable<Varchar>,
         evaluate_easiest -> Nullable<Varchar>,
         evaluate_hardest -> Nullable<Varchar>,
-        completion -> Nullable<Float>,
+        completion -> Nullable<Integer>,
         contact -> Nullable<Varchar>,
         comments -> Nullable<Varchar>,
     }
