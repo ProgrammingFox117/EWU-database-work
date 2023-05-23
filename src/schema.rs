@@ -17,9 +17,27 @@ diesel::table! {
 }
 
 diesel::table! {
+    requirements (indexs, teams) {
+        teams -> Varchar,
+        indexs -> Integer,
+        description -> Nullable<Varchar>,
+    }
+}
+
+diesel::table! {
     sprint_num_dates (sprint_num) {
         sprint_num -> Integer,
         sprint_date -> Date,
+    }
+}
+
+diesel::table! {
+    team_activities (ouath_id) {
+        teams -> Nullable<Varchar>,
+        ouath_id -> Varchar,
+        sprint_num -> Nullable<Integer>,
+        activity_index -> Nullable<Integer>,
+        answers -> Nullable<Varchar>,
     }
 }
 
@@ -41,4 +59,25 @@ diesel::table! {
     }
 }
 
-diesel::allow_tables_to_appear_in_same_query!(individual_reports, sprint_num_dates, team_reports,);
+diesel::table! {
+    users (email) {
+        email -> Varchar,
+        ouath_id -> Nullable<Varchar>,
+        is_teacher -> Nullable<Bool>,
+        is_student -> Nullable<Bool>,
+        is_admin -> Nullable<Bool>,
+        teams -> Nullable<Varchar>,
+        class -> Nullable<Varchar>,
+        first_name -> Nullable<Varchar>,
+        last_name -> Nullable<Varchar>,
+    }
+}
+
+diesel::allow_tables_to_appear_in_same_query!(
+    individual_reports,
+    requirements,
+    sprint_num_dates,
+    team_activities,
+    team_reports,
+    users,
+);

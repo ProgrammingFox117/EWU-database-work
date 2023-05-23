@@ -1,7 +1,6 @@
-use crate::schema::individual_reports;
-use crate::schema::sprint_num_dates;
-use crate::schema::team_reports;
+use crate::schema::*;
 use chrono::NaiveDate;
+
 
 #[derive(Queryable, Debug, AsChangeset)]
 pub struct SprintNumDate {
@@ -63,10 +62,9 @@ pub struct NewIndividualReport<'a> {
     pub sprint_num: i32,
 }
 
-/*#[derive(Queryable)]
-pub struct Requirements
-{
-    pub class       : String,
+#[derive(Debug, Queryable, AsChangeset)]
+pub struct Requirement {
+
     pub teams       : String,
     pub indexs      : i32,
     pub description : String,
@@ -74,18 +72,14 @@ pub struct Requirements
 
 #[derive(Insertable)]
 #[diesel(table_name = requirements)]
-pub struct NewRequirements<'a> {
-
-    pub class : &'a str,
-    pub teams  : &'a str,
+pub struct NewRequirement<'a> {
+    pub teams   : &'a str,
     pub indexs  : i32,
-    pub description  : &'a str,
+}
 
-}*/
-
-/*#[derive(Queryable)]
-pub struct TeamActivities
-{
+#[derive(Debug, Queryable, AsChangeset)]
+#[diesel(table_name = team_activities)]
+pub struct TeamActivity {
     pub teams           : String,
     pub ouath_id        : String,
     pub sprint_num      : i32,
@@ -95,13 +89,33 @@ pub struct TeamActivities
 
 #[derive(Insertable)]
 #[diesel(table_name = team_activities)]
-pub struct NewTeamActivities<'a> {
-
-    pub teams  : &'a str,
+pub struct NewTeamActivity<'a> {
     pub teams           : &'a str,
     pub ouath_id        : &'a str,
     pub sprint_num      : i32,
-    pub activity_index  : i32,
-    pub answers         : &'a str,
+}
 
-}*/
+#[derive(Debug, Queryable, AsChangeset)]
+pub struct User {
+    pub email: String,
+    pub ouath_id: String,
+    pub is_teacher: bool,
+    pub is_student: bool,
+    pub is_admin: bool,
+    pub teams: String,
+    pub class: String,
+    pub first_name: String,
+    pub last_name: String,
+}
+
+#[derive(Insertable)]
+#[diesel(table_name = users)]
+pub struct NewUser<'a> {
+    pub email: &'a str,
+    pub ouath_id: &'a str,
+    pub is_admin: bool,
+    pub first_name: &'a str,
+    pub last_name: &'a str,
+}
+
+

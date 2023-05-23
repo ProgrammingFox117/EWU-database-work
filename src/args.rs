@@ -1,6 +1,8 @@
 use chrono::NaiveDate;
 use clap::{Args, Parser, Subcommand};
 
+
+
 #[derive(Parser, Debug)]
 #[clap(author, version, about)]
 pub struct DatabaseArgs {
@@ -10,12 +12,18 @@ pub struct DatabaseArgs {
 
 #[derive(Debug, Subcommand)]
 pub enum EntityType {
-    ///Create, Update, Show
+    ///Create, Show
     Sprint(SprintCommand),
-    ///Create, Update, Show
+    ///Create, Update
     TeamReport(TeamReportCommand),
-    ///Create, Update, Show
+    ///Create, Update
     Individual(IndividualReportCommand),
+    ///Create, Update
+    Requirements(RequirementCommand),
+    ///Create, Update
+    TeamActivity(TeamActivityCommand),
+    ///Create, Update
+    User(UserCommand),
 }
 
 //start Sprint commands
@@ -117,4 +125,105 @@ pub struct UpdateIndividualReport {
     pub sunday_time: i32,
     pub discrepancy: String,
     pub request: String,
+}
+
+// commands args for requirements
+#[derive(Debug, Args)]
+pub struct RequirementCommand {
+    #[clap(subcommand)]
+    pub command: RequirementSubcommand,
+
+}
+
+#[derive(Debug, Subcommand)]
+pub enum RequirementSubcommand {
+    /// Create a new requirement
+    Create(CreateRequirement),
+
+    /// Update an existing requirement
+    Update(UpdateRequirement),
+}
+
+#[derive(Debug, Args)]
+pub struct CreateRequirement {
+    pub teams: String,
+    pub indexs: i32,
+}
+
+#[derive(Debug, Args)]
+pub struct UpdateRequirement {
+    pub teams: String,
+    pub indexs: i32,
+    pub description: String,
+}
+// commands args for team activities
+#[derive(Debug, Args)]
+pub struct TeamActivityCommand {
+    #[clap(subcommand)]
+    pub command: TeamActivitySubcommand,
+
+}
+
+#[derive(Debug, Subcommand)]
+pub enum TeamActivitySubcommand {
+    /// Create a new team activity
+    Create(CreateTeamActivity),
+
+    /// Update an existing team activity
+    Update(UpdateTeamActivity),
+}
+
+#[derive(Debug, Args)]
+pub struct CreateTeamActivity {
+    pub teams           : String,
+    pub ouath_id        : String,
+    pub sprint_num      : i32,
+}
+
+#[derive(Debug, Args)]
+pub struct UpdateTeamActivity {
+    pub teams           : String,
+    pub ouath_id        : String,
+    pub sprint_num      : i32,
+    pub activity_index  : i32,
+    pub answers         : String,
+}
+
+// commands args for Users
+#[derive(Debug, Args)]
+pub struct UserCommand {
+    #[clap(subcommand)]
+    pub command: UserSubcommand,
+
+}
+
+#[derive(Debug, Subcommand)]
+pub enum UserSubcommand {
+    /// Create a new team activity
+    Create(CreateUser),
+
+    /// Update an existing team activity
+    Update(UpdateUser),
+}
+
+#[derive(Debug, Args)]
+pub struct CreateUser {
+    pub email: String,
+    pub ouath_id: String,
+    pub is_admin: bool,
+    pub first_name: String,
+    pub last_name: String,
+}
+
+#[derive(Debug, Args)]
+pub struct UpdateUser {
+    pub email: String,
+    pub ouath_id: String,
+    pub is_teacher: bool,
+    pub is_student: bool,
+    pub is_admin:   bool,
+    pub teams:      String,
+    pub class:      String,
+    pub first_name: String,
+    pub last_name:  String,
 }
