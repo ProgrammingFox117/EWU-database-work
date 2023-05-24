@@ -35,7 +35,7 @@ create table requirements
 
 create table individual_reports
 (
-    ouath_id           varchar(255) not null,
+    email           varchar(255) not null,
     sprint_num         int          not null,
     monday_time        int          null,
     tuesday_time       int          null,
@@ -46,7 +46,7 @@ create table individual_reports
     sunday_time        int          null,
     discrepancy        varchar(300) null,
     request            varchar(300) null,
-    primary key (ouath_id,sprint_num)
+    primary key (email,sprint_num)
 
   /*  constraint individual_report_ibfk_1
         foreign key (sprint_num) references sprintnum_date (sprint_num)
@@ -54,11 +54,12 @@ create table individual_reports
 );
 create table team_activities
 (
-    teams          varchar(50)  null,
-    ouath_id       varchar(255) not null primary key,
+    teams          varchar(50)  not null,
+    email       varchar(255)    not null,
     sprint_num         int      null,
     activity_index int          null,
-    answers        varchar(255) null
+    answers        varchar(255) null,
+    primary key (teams,email)
     /*constraint team_activities_ibfk_1
         foreign key (teams) references team_report (teams),
     constraint team_activities_ibfk_2

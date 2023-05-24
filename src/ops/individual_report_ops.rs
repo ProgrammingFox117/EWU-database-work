@@ -27,7 +27,7 @@ pub fn create_individual_report(individual_report_cmd: CreateIndividualReport) {
 
     let connection = &mut establish_connection();
     let new_individual_report = NewIndividualReport {
-        ouath_id: &individual_report_cmd.ouath_id,
+        email: &individual_report_cmd.email,
         sprint_num: individual_report_cmd.sprint_num,
     };
     // DATABASE TARGET
@@ -43,7 +43,7 @@ pub fn update_individual_report(individual_report_cmd: UpdateIndividualReport) {
 
     let connection = &mut establish_connection();
     let new_individual_report = IndividualReport {
-        ouath_id: individual_report_cmd.ouath_id.clone(),
+        email: individual_report_cmd.email.clone(),
         sprint_num: individual_report_cmd.sprint_num,
         monday_time: individual_report_cmd.monday_time,
         tuesday_time: individual_report_cmd.tuesday_time,
@@ -57,7 +57,7 @@ pub fn update_individual_report(individual_report_cmd: UpdateIndividualReport) {
     };
 
     let updated_row = diesel::update(individual_reports.find((
-        individual_report_cmd.ouath_id,
+        individual_report_cmd.email,
         individual_report_cmd.sprint_num,
     )))
     .set(&new_individual_report)

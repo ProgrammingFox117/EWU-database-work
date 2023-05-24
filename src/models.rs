@@ -42,7 +42,7 @@ pub struct NewTeamReport<'a> {
 
 #[derive(Queryable, Debug, AsChangeset)]
 pub struct IndividualReport {
-    pub ouath_id: String,
+    pub email: String,
     pub sprint_num: i32,
     pub monday_time: i32,
     pub tuesday_time: i32,
@@ -58,7 +58,7 @@ pub struct IndividualReport {
 #[derive(Insertable)]
 #[diesel(table_name = individual_reports)]
 pub struct NewIndividualReport<'a> {
-    pub ouath_id: &'a str,
+    pub email: &'a str,
     pub sprint_num: i32,
 }
 
@@ -81,7 +81,7 @@ pub struct NewRequirement<'a> {
 #[diesel(table_name = team_activities)]
 pub struct TeamActivity {
     pub teams           : String,
-    pub ouath_id        : String,
+    pub email           : String,
     pub sprint_num      : i32,
     pub activity_index  : i32,
     pub answers         : String,
@@ -91,7 +91,7 @@ pub struct TeamActivity {
 #[diesel(table_name = team_activities)]
 pub struct NewTeamActivity<'a> {
     pub teams           : &'a str,
-    pub ouath_id        : &'a str,
+    pub email           : &'a str,
     pub sprint_num      : i32,
 }
 

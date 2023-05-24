@@ -1,8 +1,8 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    individual_reports (ouath_id, sprint_num) {
-        ouath_id -> Varchar,
+    individual_reports (email, sprint_num) {
+        email -> Varchar,
         sprint_num -> Integer,
         monday_time -> Nullable<Integer>,
         tuesday_time -> Nullable<Integer>,
@@ -32,9 +32,9 @@ diesel::table! {
 }
 
 diesel::table! {
-    team_activities (ouath_id) {
-        teams -> Nullable<Varchar>,
-        ouath_id -> Varchar,
+    team_activities (teams, email) {
+        teams -> Varchar,
+        email -> Varchar,
         sprint_num -> Nullable<Integer>,
         activity_index -> Nullable<Integer>,
         answers -> Nullable<Varchar>,

@@ -22,7 +22,7 @@ pub fn create_team_activity(team_activity_cmd: CreateTeamActivity) {
     let connection = &mut establish_connection();
     let new_team_activity = NewTeamActivity {
         teams: &team_activity_cmd.teams,
-        ouath_id: &team_activity_cmd.ouath_id,
+        email: &team_activity_cmd.email,
         sprint_num: team_activity_cmd.sprint_num,
     };
     // DATABASE TARGET
@@ -37,14 +37,14 @@ pub fn update_team_activity(team_activity_cmd: UpdateTeamActivity) {
 
     let connection = &mut establish_connection();
     let new_team_activity = TeamActivity {
-        teams: team_activity_cmd.teams,
-        ouath_id: team_activity_cmd.ouath_id.clone(),
+        teams: team_activity_cmd.teams.clone(),
+        email: team_activity_cmd.email.clone(),
         sprint_num: team_activity_cmd.sprint_num,
         activity_index: team_activity_cmd.activity_index,
         answers: team_activity_cmd.answers,
     };
 
-    let updated_row = diesel::update(team_activities.find(team_activity_cmd.ouath_id))
+    let updated_row = diesel::update(team_activities.find((team_activity_cmd.teams, team_activity_cmd.email)))
         .set(&new_team_activity)
         .execute(connection)
         .expect("Error updating requirement");

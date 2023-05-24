@@ -108,13 +108,13 @@ pub enum IndividualReportSubcommand {
 
 #[derive(Debug, Args)]
 pub struct CreateIndividualReport {
-    pub ouath_id: String,
+    pub email: String,
     pub sprint_num: i32,
 }
 
 #[derive(Debug, Args)]
 pub struct UpdateIndividualReport {
-    pub ouath_id: String,
+    pub email: String,
     pub sprint_num: i32,
     pub monday_time: i32,
     pub tuesday_time: i32,
@@ -176,14 +176,14 @@ pub enum TeamActivitySubcommand {
 #[derive(Debug, Args)]
 pub struct CreateTeamActivity {
     pub teams           : String,
-    pub ouath_id        : String,
+    pub email           : String,
     pub sprint_num      : i32,
 }
 
 #[derive(Debug, Args)]
 pub struct UpdateTeamActivity {
     pub teams           : String,
-    pub ouath_id        : String,
+    pub email           : String,
     pub sprint_num      : i32,
     pub activity_index  : i32,
     pub answers         : String,
