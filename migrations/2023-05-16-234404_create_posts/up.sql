@@ -5,10 +5,11 @@ create table users
     is_teacher bool   null,
     is_student bool   null,
     is_admin   bool   null,
-    teams      varchar(50)  null,
+    teams      varchar(50) null,
     class      varchar(50)  null,
     first_name varchar(30)  null,
-    last_name  varchar(30)  null
+    last_name  varchar(30)  null,
+    index idx_teams(teams)
 );
 
 create table sprint_num_dates

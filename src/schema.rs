@@ -73,6 +73,11 @@ diesel::table! {
     }
 }
 
+diesel::joinable!(individual_reports -> sprint_num_dates (sprint_num));
+diesel::joinable!(individual_reports -> users (email));
+diesel::joinable!(team_activities -> sprint_num_dates (sprint_num));
+diesel::joinable!(team_reports -> sprint_num_dates (sprint_num));
+
 diesel::allow_tables_to_appear_in_same_query!(
     individual_reports,
     requirements,
