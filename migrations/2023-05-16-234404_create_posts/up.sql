@@ -1,9 +1,38 @@
+create table users
+(
+    email      varchar(255) not null primary key,
+    ouath_id   varchar(255) null,
+    is_teacher bool   null,
+    is_student bool   null,
+    is_admin   bool   null,
+    teams      varchar(50)  null,
+    class      varchar(50)  null,
+    first_name varchar(30)  null,
+    last_name  varchar(30)  null
+);
+
 create table sprint_num_dates
 (
-    sprint_num  int  not null,
-    sprint_date date not null,
-    primary key (sprint_num)
+    sprint_num  int  not null primary key,
+    sprint_date date not null
 );
+
+create table team_activities
+(
+    teams          varchar(50)  not null,
+    email       varchar(255)    not null,
+    sprint_num         int      null,
+    activity_index int          null,
+    answers        varchar(255) null,
+    primary key (teams,email),
+    constraint team_activities_ibfk_1
+        foreign key (teams) references users(teams),
+    constraint team_activities_ibfk_2
+        foreign key (email) references users(email),
+    constraint team_activities_ibfk_3
+        foreign key (sprint_num) references sprint_num_dates(sprint_num)
+);
+
 create table team_reports
 (
     teams              varchar(50) not null ,
@@ -19,9 +48,11 @@ create table team_reports
     completion         int null,
     contact            varchar(300) null,
     comments           varchar(300) null,
-    primary key (teams, sprint_num)
-    /*constraint team_report_ibfk_1
-        foreign key (sprint_num) references sprintnum_date (sprint_num)*/
+    primary key (teams, sprint_num),
+    constraint team_report_ibfk_1
+        foreign key (teams) references users(teams),
+    constraint team_report_ibfk_2
+        foreign key (sprint_num) references sprint_num_dates(sprint_num)
 );
 
 create table requirements
@@ -29,8 +60,9 @@ create table requirements
     teams       varchar(255) not null,
     indexs      int          not null,
     description varchar(255) null,
-    primary key (indexs, teams)
-
+    primary key (indexs, teams),
+    constraint requirements_ibfk_1
+        foreign key (teams) references users(teams)
 );
 
 create table individual_reports
@@ -46,36 +78,11 @@ create table individual_reports
     sunday_time        int          null,
     discrepancy        varchar(300) null,
     request            varchar(300) null,
-    primary key (email,sprint_num)
 
-  /*  constraint individual_report_ibfk_1
-        foreign key (sprint_num) references sprintnum_date (sprint_num)
-*/
+    primary key (email,sprint_num),
+    constraint individual_report_ibfk_1
+        foreign key (email) references users(email),
+    constraint individual_report_ibfk_2
+        foreign key (sprint_num) references sprint_num_dates(sprint_num)
 );
-create table team_activities
-(
-    teams          varchar(50)  not null,
-    email       varchar(255)    not null,
-    sprint_num         int      null,
-    activity_index int          null,
-    answers        varchar(255) null,
-    primary key (teams,email)
-    /*constraint team_activities_ibfk_1
-        foreign key (teams) references team_report (teams),
-    constraint team_activities_ibfk_2
-        foreign key (sprint_num) references sprintnum_date (sprint_num)*/
-);
-create table users
-(
-    email      varchar(255) not null primary key,
-    ouath_id   varchar(255) null,
-    is_teacher bool   null,
-    is_student bool   null,
-    is_admin   bool   null,
-    teams      varchar(50)  null,
-    class      varchar(50)  null,
-    first_name varchar(30)  null,
-    last_name  varchar(30)  null
-);
-
 
